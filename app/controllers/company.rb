@@ -1,5 +1,5 @@
 CompanyApi::App.controllers do
-  get :index, :map => '/', :provides => :json do
+  get :index, :map => '/' do
     {
         success: false,
         message: 'see README.md on usage'
