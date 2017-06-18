@@ -50,14 +50,16 @@ CompanyApi::App.controllers do
 
     # TODO: validate input
 
-    begin
-      company = Company.new(cvr: cvr, name: name, address: address, city: city, country: country, phone: phone).save!
 
+    company = Company.new(cvr: cvr, name: name, address: address, city: city, country: country, phone: phone)
+    saved = company.save
+
+    if saved
       {
           success: true,
-          data: company.to_json
+          data: company
       }.to_json
-    rescue
+    else
       {
           success: false,
           message: 'could not create company'
