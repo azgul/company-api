@@ -3,7 +3,7 @@ CompanyApi::App.controllers do
     halt 404, 'see README.md on usage'
   end
 
-  get :search, :map => 'company/search/:id' do
+  get :get, :map => 'company/get/:id' do
     begin
       company = Company.find(params[:id])
       company.to_json

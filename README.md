@@ -66,13 +66,13 @@ Connection: Keep-Alive
 
 
 ## Get company by id
-Path: `GET /company/search/:id`
+Path: `GET /company/get/:id`
 
 Possible status codes: `200`, `404`
 
 Example usage:
 ```
-$ curl -i http://127.0.0.1:3000/company/search/1
+$ curl -i http://127.0.0.1:3000/company/get/1
 HTTP/1.1 200 OK
 Content-Type: text/html;charset=utf-8
 Content-Length: 216
@@ -93,4 +93,49 @@ Connection: Keep-Alive
   "phone": "+45 12 34 56 78",
   "created_at": "2017-06-18T14:11:10.778Z",
   "updated_at": "2017-06-18T14:11:10.778Z"
-}```
+}
+```
+
+
+# Considerations
+## Authentication
+> You don't have to add _authentication_ to your web service, but suggest a protocol/method and discuss your choice.
+
+`Authorization` header is the way to go. Which style depends on the needs. A global API key would be suitable if the 
+purpose is to grant access to _everyone_ who wants to access it. Otherwise let users generate their own API key through 
+an admin interface.
+
+OAuth could possibly be used for identifying users such that no signup is needed.
+
+## Redundancy
+> How can one make the service redundant? Which considerations should one make?
+
+Recently discovered [traefik](https://traefik.io/) which appears great for the task. Automatically discovers Docker 
+containers and acts as a reverse proxy for them, also supports load balancing which is required in order to achieve 
+redundancy.
+
+Another option to look at could be [nginx](nginx), where auto discovery would 
+[also be possible](https://www.nginx.com/blog/service-discovery-in-a-microservices-architecture/).
+
+## Versioning of data
+> How can one implement versioning of company data?
+
+Introducing a `revision` column for the `companies` table would do the trick. Of course users would only be allowed to 
+edit the latest revision. The `GET /companies/all` endpoint would need to be refactored to only return the latest 
+`revision` for each company.
+
+## Search function
+> How would you design and implement a search function?
+
+Depends on the needs. Free text search is the most user friendly, so that is an option. If the goal is to let users 
+look up by one or more properties, it would look something along the lines of..
+
+`POST /company/search` 
+```
+{
+  "cvr": 12345678,
+  "name": "A cool"
+}
+```
+.. where the user interface would send one or more properties that could identify the requested company. The database 
+schema would need to be changed to include indexes on the searchable properties.
