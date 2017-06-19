@@ -1,24 +1,14 @@
 CompanyApi::App.controllers do
   get :index, :map => '/' do
-    {
-        success: false,
-        message: 'see README.md on usage'
-    }.to_json
+    halt 404, 'see README.md on usage'
   end
 
   get :search, :map => 'company/search/:id' do
-    company = Company.find(params[:id])
-
-    if company
-      {
-          success: true,
-          data: company
-      }.to_json
-    else
-      {
-          success: false,
-          message: 'company does not exist'
-      }.to_json
+    begin
+      company = Company.find(params[:id])
+      company.to_json
+    rescue ActiveRecord::RecordNotFound
+      halt 404, 'company does not exist'
     end
   end
 
@@ -32,10 +22,7 @@ CompanyApi::App.controllers do
         }
     end
 
-    {
-        success: true,
-        data: companies
-    }.to_json
+    companies.to_json
   end
 
   post :create, :map => 'company/create', :csrf_protection => false do
@@ -50,20 +37,17 @@ CompanyApi::App.controllers do
 
     # TODO: validate input
 
+    begin
+      company = Company.new(cvr: cvr, name: name, address: address, city: city, country: country, phone: phone)
+      saved = company.save
 
-    company = Company.new(cvr: cvr, name: name, address: address, city: city, country: country, phone: phone)
-    saved = company.save
-
-    if saved
-      {
-          success: true,
-          data: company
-      }.to_json
-    else
-      {
-          success: false,
-          message: 'could not create company'
-      }.to_json
+      if saved
+        company.to_json
+      else
+        halt 500, 'could not create company'
+      end
+    rescue
+      halt 500, 'could not create company'
     end
   end
 end
