@@ -19,7 +19,15 @@ gem 'rack-cors', :require => 'rack/cors'
 
 # Component requirements
 gem 'activerecord', '>= 3.1', :require => 'active_record'
-gem 'sqlite3'
+
+group :development, :test do
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
+  gem 'activerecord-postgresql-adapter'
+end
 
 # Test requirements
 gem 'rspec', :group => 'test'
