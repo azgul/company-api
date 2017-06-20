@@ -19,7 +19,7 @@ ActiveRecord::Base.configurations[:development] = {
 
 }
 
-configure :production do
+begin
   db = URI.parse(ENV['DATABASE_URL'])
   ActiveRecord::Base.configurations[:production] = {
     :adapter => 'postgreql',
@@ -29,6 +29,7 @@ configure :production do
     :database => db.path[1..-1],
     :encoding => 'utf8'
   }
+rescue
 end
 
 ActiveRecord::Base.configurations[:test] = {
