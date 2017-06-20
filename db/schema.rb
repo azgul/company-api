@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 1) do
+ActiveRecord::Schema.define(version: 2) do
 
   create_table "companies", force: :cascade do |t|
     t.integer "cvr"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 1) do
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["cvr"], name: "index_companies_on_cvr", unique: true
   end
 
 end
