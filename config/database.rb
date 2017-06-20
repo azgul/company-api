@@ -22,7 +22,7 @@ ActiveRecord::Base.configurations[:development] = {
 begin
   db = URI.parse(ENV['DATABASE_URL'])
   ActiveRecord::Base.configurations[:production] = {
-    :adapter => 'postgreql',
+    :adapter => 'postgresql',
     :host => db.host,
     :username => db.user,
     :password => db.password,
