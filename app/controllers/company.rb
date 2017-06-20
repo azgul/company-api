@@ -44,14 +44,7 @@ CompanyApi::App.controllers do
     country = params['country']
     phone = params['phone']
 
-    if cvr.nil? || cvr.empty? ||
-        name.nil? || name.empty? ||
-        address.nil? || address.empty? ||
-        city.nil? || city.empty? ||
-        country.nil? || country.empty?
-
-      halt 400, 'missing properties'
-    end
+    # TODO: validate input
 
     begin
       company = Company.new(cvr: cvr, name: name, address: address, city: city, country: country, phone: phone)
