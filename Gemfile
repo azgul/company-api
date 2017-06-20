@@ -15,6 +15,7 @@ source 'https://rubygems.org'
 
 # Project requirements
 gem 'rake'
+gem 'rack-cors', :require => 'rack/cors'
 
 # Component requirements
 gem 'activerecord', '>= 3.1', :require => 'active_record'

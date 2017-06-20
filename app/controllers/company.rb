@@ -3,7 +3,7 @@ CompanyApi::App.controllers do
     halt 404, 'see README.md on usage'
   end
 
-  get :get, :map => 'company/get/:id' do
+  get :get, :map => 'company/:id' do
     begin
       company = Company.find(params[:id])
       company.to_json
@@ -25,7 +25,7 @@ CompanyApi::App.controllers do
     companies.to_json
   end
 
-  post :create, :map => 'company/create', :csrf_protection => false do
+  post :create, :map => 'company/create' do
     params = JSON.parse(request.env['rack.input'].read)
 
     cvr = params['cvr']

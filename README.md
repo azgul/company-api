@@ -38,7 +38,6 @@ Possible status codes: `200`, `400`, `500`
 
 Example usage:
 
-Header `Content-Type: application/json`
 ```
 $ curl -X POST -i http://127.0.0.1:3000/company/create --header Content-Type:application/json -d "{\"cvr\":\"12345679\",\"name\":\"Another cool company\",\"address\":\"Another cool address\",\"city\":\"Aarhus\",\"country\":\"Denmark\",\"phone\":\"+45 12 34 56 98\"}"
 HTTP/1.1 200 OK
@@ -66,13 +65,13 @@ Connection: Keep-Alive
 
 
 ## Get company by id
-Path: `GET /company/get/:id`
+Path: `GET /company/:id`
 
 Possible status codes: `200`, `404`
 
 Example usage:
 ```
-$ curl -i http://127.0.0.1:3000/company/get/1
+$ curl -i http://127.0.0.1:3000/company/1
 HTTP/1.1 200 OK
 Content-Type: text/html;charset=utf-8
 Content-Length: 216

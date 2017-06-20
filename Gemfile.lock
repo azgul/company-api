@@ -59,6 +59,7 @@ GEM
       padrino-core (= 0.14.1.1)
     padrino-support (0.14.1.1)
     rack (2.0.3)
+    rack-cors (0.4.1)
     rack-protection (2.0.0)
       rack
     rack-test (0.6.3)
@@ -95,6 +96,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord (>= 3.1)
   padrino (= 0.14.1.1)
+  rack-cors
   rack-test
   rake
   rspec

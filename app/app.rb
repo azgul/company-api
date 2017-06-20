@@ -3,11 +3,16 @@ module CompanyApi
     use ConnectionPoolManagement
     register Padrino::Mailer
     register Padrino::Helpers
-    enable :sessions
 
-    set :protection, true
-    set :protect_from_csrf, true
-    set :allow_disabled_csrf, true
+    disable :protect_from_csrf
+
+    # allow CORS
+    use Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
 
     ##
     # Caching support.
