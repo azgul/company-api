@@ -10,7 +10,7 @@ Example usage:
 ```
 $ curl -i http://127.0.0.1:3000/companies/all                                                                                                                                                (master)
 HTTP/1.1 200 OK
-Content-Type: text/html;charset=utf-8
+Content-Type: application/json
 Content-Length: 190
 X-Xss-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
@@ -41,7 +41,7 @@ Example usage:
 ```
 $ curl -X POST -i http://127.0.0.1:3000/company/create --header Content-Type:application/json -d "{\"cvr\":\"12345679\",\"name\":\"Another cool company\",\"address\":\"Another cool address\",\"city\":\"Aarhus\",\"country\":\"Denmark\",\"phone\":\"+45 12 34 56 98\"}"
 HTTP/1.1 200 OK
-Content-Type: text/html;charset=utf-8
+Content-Type: application/json
 Content-Length: 228
 X-Xss-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
@@ -73,7 +73,7 @@ Example usage:
 ```
 $ curl -i http://127.0.0.1:3000/company/1
 HTTP/1.1 200 OK
-Content-Type: text/html;charset=utf-8
+Content-Type: application/json
 Content-Length: 216
 X-Xss-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
