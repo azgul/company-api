@@ -1,9 +1,14 @@
 CompanyApi::App.controllers do
+
   get :index, :map => '/' do
+    content_type 'application/json'
+
     halt 404, 'see README.md on usage'
   end
 
   get :get, :map => 'company/:id' do
+    content_type 'application/json'
+
     begin
       company = Company.find(params[:id])
       company.to_json
@@ -13,6 +18,8 @@ CompanyApi::App.controllers do
   end
 
   get :list, :map => 'companies/all' do
+    content_type 'application/json'
+
     companies = []
 
     Company.all.map do |c|
@@ -26,6 +33,8 @@ CompanyApi::App.controllers do
   end
 
   post :create, :map => 'company/create' do
+    content_type 'application/json'
+
     params = JSON.parse(request.env['rack.input'].read)
 
     cvr = params['cvr']
